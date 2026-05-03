@@ -1,5 +1,7 @@
 const SESSION_KEY = "seoRadarScanSession";
 const ANALYSIS_CACHE_KEY = "seoRadarLatestAnalysis";
+const API_BASE = "http://localhost:3000/api";
+const AUTH_STORAGE_KEY = "seoRadarAuthToken";
 
 const sourceQueryPill = document.getElementById("sourceQueryPill");
 const focusKeywordPill = document.getElementById("focusKeywordPill");
@@ -516,6 +518,45 @@ async function runAnalysis(session) {
   });
 
   setProgress(session.serpResults.length, session.serpResults.length, "Analiz tamamlandi.");
+  await trySaveToBackend(session, state.analyses);
+}
+
+async function trySaveToBackend(session, analyses) {
+  const stored = await chrome.storage.local.get(AUTH_STORAGE_KEY);
+  const token = stored[AUTH_STORAGE_KEY];
+  if (!token) {
+    setProgress(session.serpResults.length, session.serpResults.length,
+      "Analiz tamamlandı. (Kaydetmek için giriş yapın)");
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/scans`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        sourceQuery: session.sourceQuery,
+        focusKeyword: session.focusKeyword || "",
+        strictMode: session.strictMode,
+        sourceUrl: session.sourceUrl,
+        results: analyses
+      })
+    });
+
+    if (response.ok) {
+      setProgress(session.serpResults.length, session.serpResults.length,
+        "✓ Analiz tamamlandı ve hesabına kaydedildi.");
+    } else {
+      setProgress(session.serpResults.length, session.serpResults.length,
+        "Analiz tamamlandı. (Kaydetme başarısız)");
+    }
+  } catch {
+    setProgress(session.serpResults.length, session.serpResults.length,
+      "Analiz tamamlandı. (Sunucuya ulaşılamadı)");
+  }
 }
 
 function toCsvValue(value) {

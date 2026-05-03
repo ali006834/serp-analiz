@@ -1,0 +1,6 @@
+backend/node_modules/
+backend/.env
+backend/prisma/dev.db
+backend/prisma/dev.db-journal
+extension.crx
+extension.pem

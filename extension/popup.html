@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Radar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="popup-body">
+  <main class="popup-shell">
+    <p class="eyebrow">SERP Intelligence</p>
+    <h1>SEO Radar</h1>
+
+    <!-- OTURUM AÇIK BAR -->
+    <section id="authBar" class="auth-bar hidden">
+      <span id="authUserLabel"></span>
+      <button id="logoutBtn" class="btn-ghost">Çıkış</button>
+    </section>
+
+    <!-- LOGIN / REGISTER FORMU -->
+    <section id="authPanel" class="auth-panel">
+      <div class="auth-tabs">
+        <button id="tabLogin" class="auth-tab is-active">Giriş Yap</button>
+        <button id="tabRegister" class="auth-tab">Kayıt Ol</button>
+      </div>
+      <form id="authForm" class="control-stack">
+        <label class="field">
+          <span>Email</span>
+          <input type="email" id="authEmail" placeholder="ornek@mail.com" autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Şifre</span>
+          <input type="password" id="authPassword" placeholder="En az 6 karakter">
+        </label>
+        <label class="field hidden" id="nameField">
+          <span>Ad Soyad</span>
+          <input type="text" id="authName" placeholder="Adın">
+        </label>
+        <button type="submit" id="authSubmitBtn">Giriş Yap</button>
+      </form>
+      <p id="authStatus" class="status hidden"></p>
+    </section>
+
+    <!-- GEÇMİŞ TARAMALAR (login sonrası) -->
+    <section id="historyPanel" class="history-panel hidden">
+      <div class="history-head">
+        <span>Son Taramalar</span>
+        <button id="refreshHistory" class="btn-ghost-sm">↻</button>
+      </div>
+      <div id="historyList" class="history-list">
+        <p class="muted-copy">Yükleniyor...</p>
+      </div>
+    </section>
+
+    <p class="intro">
+      Google arama sonucundaki rakipleri topla, SEO sinyallerini tara ve güçlü bir rakip listesi oluştur.
+    </p>
+
+    <section class="context-card">
+      <div class="context-row">
+        <span>Aktif sayfa</span>
+        <strong id="pageContext">Kontrol ediliyor...</strong>
+      </div>
+      <div class="context-row">
+        <span>Google sorgusu</span>
+        <strong id="detectedQuery">Algılanıyor...</strong>
+      </div>
+    </section>
+
+    <form id="scanForm" class="control-stack">
+      <label class="field">
+        <span>Ek filtre anahtar kelime</span>
+        <input type="text" id="focusKeyword" placeholder="Örnek: spor" autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Maksimum sonuç sayısı</span>
+        <input type="number" id="maxResults" min="5" max="20" step="1" value="10">
+      </label>
+      <label class="checkbox-field">
+        <input type="checkbox" id="strictMode" checked>
+        <span>Yalnızca temel sorgu + filtre birlikte eşleşenleri öne çıkar</span>
+      </label>
+      <button id="scanBtn" type="submit">Rakipleri Tara</button>
+    </form>
+
+    <p id="status" class="status status-info">Bu araç en iyi Google sonuç sayfasındayken çalışır.</p>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

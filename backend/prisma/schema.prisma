@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  scans     Scan[]
+}
+
+model Scan {
+  id           String       @id @default(cuid())
+  userId       String
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sourceQuery  String
+  focusKeyword String?
+  strictMode   Boolean      @default(false)
+  sourceUrl    String
+  createdAt    DateTime     @default(now())
+  results      ScanResult[]
+}
+
+model ScanResult {
+  id             String  @id @default(cuid())
+  scanId         String
+  scan           Scan    @relation(fields: [scanId], references: [id], onDelete: Cascade)
+  position       Int
+  url            String
+  domain         String
+  title          String?
+  metaDescription String?
+  intentLabel    String?
+  pageType       String?
+  score          Int
+  authorityScore Int
+  queryCoverage  Int
+  focusCoverage  Int
+  keywordDensity String?
+  isCompetitorMatch Boolean @default(false)
+  fetchOk        Boolean @default(false)
+  rankingTerms   String?
+  highlights     String?
+}
