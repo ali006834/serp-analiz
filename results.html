@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Radar Results</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="results-body">
+  <main class="results-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Competitive Intelligence</p>
+        <h1>SEO Radar Analiz Paneli</h1>
+        <p class="intro" id="scanSummary">Son tarama yukleniyor...</p>
+      </div>
+      <div class="hero-actions">
+        <span class="pill" id="sourceQueryPill">Sorgu: -</span>
+        <span class="pill" id="focusKeywordPill">Filtre: -</span>
+      </div>
+    </header>
+
+    <nav class="menu-bar" id="menuBar">
+      <button type="button" class="menu-tab is-active" data-panel="overviewPanel">Genel Bakis</button>
+      <button type="button" class="menu-tab" data-panel="opportunitiesPanel">Firsatlar</button>
+      <button type="button" class="menu-tab" data-panel="clustersPanel">Kumeler</button>
+      <button type="button" class="menu-tab" data-panel="exportPanel">Disa Aktar</button>
+    </nav>
+
+    <section class="progress-card">
+      <div class="progress-head">
+        <strong>Analiz durumu</strong>
+        <span id="progressText">Hazirlaniyor...</span>
+      </div>
+      <div class="progress-bar">
+        <span id="progressFill"></span>
+      </div>
+    </section>
+
+    <section id="emptyState" class="empty-state hidden">
+      Tarama verisi bulunamadi. Once Google sonuc sayfasinda popup uzerinden yeni bir analiz baslat.
+    </section>
+
+    <section id="overviewPanel" class="panel-section is-active">
+      <section class="stats-grid">
+        <article class="stat-card">
+          <span>Toplanan sonuc</span>
+          <strong id="totalCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Rakip eslesmesi</span>
+          <strong id="matchCount">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Ortalama skor</span>
+          <strong id="averageScore">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Basarili fetch</span>
+          <strong id="fetchCount">0</strong>
+        </article>
+      </section>
+
+      <section class="toolbar">
+        <label class="field compact-field">
+          <span>Liste icinde ara</span>
+          <input type="text" id="searchFilter" placeholder="domain, baslik veya snippet">
+        </label>
+
+        <label class="checkbox-field compact-checkbox">
+          <input type="checkbox" id="onlyMatches">
+          <span>Sadece uygun rakipleri goster</span>
+        </label>
+      </section>
+
+      <section id="resultsGrid" class="results-grid"></section>
+    </section>
+
+    <section id="opportunitiesPanel" class="panel-section">
+      <div class="insight-grid">
+        <article class="insight-card">
+          <div class="section-head">
+            <h2>Sayfa Niyeti</h2>
+            <p>Rakiplerin kategori, urun, icerik veya marka agirliklarini ayrica gor.</p>
+          </div>
+          <div id="intentSummary" class="stack-list"></div>
+        </article>
+
+        <article class="insight-card">
+          <div class="section-head">
+            <h2>Otorite Liderleri</h2>
+            <p>On-page sinyaller ve yapisal guce gore one cikan alanlar.</p>
+          </div>
+          <div id="authorityLeaders" class="stack-list"></div>
+        </article>
+      </div>
+
+      <article class="insight-card full-width-card">
+        <div class="section-head">
+          <h2>Kelime Boslugu ve Firsatlar</h2>
+          <p>Guclu rakiplerde sik gecen fakat ana sorguda olmayan modifier firsatlari.</p>
+        </div>
+        <div id="keywordGapList" class="tag-cloud"></div>
+      </article>
+    </section>
+
+    <section id="clustersPanel" class="panel-section">
+      <article class="insight-card full-width-card">
+        <div class="section-head">
+          <h2>Rakip Kumelendirme</h2>
+          <p>Rakipleri niyet ve sayfa tipi bazinda ayri bloklarda incele.</p>
+        </div>
+        <div id="clustersGrid" class="cluster-grid"></div>
+      </article>
+    </section>
+
+    <section id="exportPanel" class="panel-section">
+      <div class="insight-grid">
+        <article class="insight-card">
+          <div class="section-head">
+            <h2>CSV Export</h2>
+            <p>Tum analiz satirlarini indir ve Excel veya Sheets icinde kullan.</p>
+          </div>
+          <button type="button" id="exportCsvBtn">CSV Indir</button>
+          <p class="helper-copy" id="exportStatus">Hazir.</p>
+        </article>
+
+        <article class="insight-card">
+          <div class="section-head">
+            <h2>Analiz Ozeti</h2>
+            <p>Disa aktarim oncesi kisa panel ozeti.</p>
+          </div>
+          <div id="exportSummary" class="stack-list"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="analyzer.js"></script>
+  <script src="results.js"></script>
+</body>
+</html>

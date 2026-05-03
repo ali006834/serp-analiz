@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "SEO Radar Competitive Scanner",
+  "version": "2.0.0",
+  "description": "Google SERP icinden rakipleri toplayan ve sayfa bazli SEO sinyallerini analiz eden Chrome uzantisi.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "SEO Radar",
+    "default_popup": "popup.html"
+  }
+}
